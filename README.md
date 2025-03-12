@@ -5,7 +5,7 @@
 
 A full-stack application for viewing and managing retail planning data.
 
-🌐 **Live Demo**: [data-viewer-app66.vercel.app/] ([https://gs-060699-harunath-eskuri.vercel.app/])
+🌐 **Live Demo**: ([https://gs-060699-harunath-eskuri.vercel.app/])
 
 ## 🚀 Features
 
