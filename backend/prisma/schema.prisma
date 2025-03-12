@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  password   String
+  name       String?  @default("new user")
+  profilePic String?  @default("https://res.cloudinary.com/degrggosz/image/upload/v1741712651/default-profile-pic-e1513291410505_ds7wda.jpg")
+  createdAt  DateTime @default(now())
+}
+
+model Store {
+  id  String @id @unique
+  label  String  // Add this field
+  city  String
+  state String
+  planning Planning[]
+}
+
+model SKU {
+  id          String @id @unique
+  label       String
+  class       String
+  department  String
+  price       Decimal
+  cost        Decimal
+  planning    Planning[]
+}
+
+model Planning {
+  id       String  @id @default(uuid())
+  storeId  String
+  skuId    String
+  week     String
+  units    String
+  
+  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  sku   SKU   @relation(fields: [skuId], references: [id], onDelete: Cascade)
+}
+
